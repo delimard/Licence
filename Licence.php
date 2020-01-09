@@ -9,6 +9,8 @@ namespace Licence;
 use Thelia\Module\BaseModule;
 use Propel\Runtime\Connection\ConnectionInterface;
 use Thelia\Install\Database;
+use Thelia\Model\Message;
+use Thelia\Model\MessageQuery;
 
 /**
  * Class Licence
@@ -22,7 +24,23 @@ class Licence extends BaseModule
     public function postActivation(ConnectionInterface $con = null)
     {
         $database = new Database($con);
-
         $database->insertSql(null, [__DIR__ . "/Config/create.sql", __DIR__ . "/Config/insert.sql"]);
+
+        // create new message
+        if (null === MessageQuery::create()->findOneByName('mail_licence')) {
+            $message = new Message();
+            $message
+                ->setName('mail_licence')
+                ->setHtmlTemplateFileName('licence-mail.html')
+                ->setHtmlLayoutFileName('')
+                ->setlocale('fr_FR')
+                ->setSubject('Votre numero de licence')
+                ->setTitle('Email envoie numero de licence')
+                ->setSecured(0)
+                ->save();
+
+
+        }
+
     }
 }
