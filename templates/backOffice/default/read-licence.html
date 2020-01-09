@@ -1,0 +1,22 @@
+
+<div id="licence">
+    <div class="clearfix"></div>
+
+
+    <div class="title title-without-tabs clearfix">
+        Licence
+    </div>
+        <div class="col-md-8">
+            {loop type="order_product" name="licenceread" order="$order_id"}
+            <ul class="list-unstyled">
+                {loop type="product" name="licenseid" ref="$REF"}
+                <li><strong>{$TITLE}</strong></li>
+                {loop type="licence" name="Licence" order_id="$order_id" product_id="$ID"}
+                <li><strong>N° de licence :</strong> {$PRODUCT_KEY}</li>
+                <li><strong>Date d'expiration :</strong> {$EXPIRATION_DATE|date_format:"%d/%m/%Y"}</li>
+                {/loop}
+                {/loop}
+            </ul>
+            {/loop}
+        </div>
+    </div>

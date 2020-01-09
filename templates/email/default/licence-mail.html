@@ -1,0 +1,36 @@
+{extends file="email-layout.tpl"}
+{* Do not provide a "Open in browser" link  *}
+{block name="browser"}{/block}
+{* No pre-header *}
+{block name="pre-header"}{/block}
+
+{default_locale locale={$locale}}
+
+{* Content  *}
+{block name="email-content"}
+{loop name="order.invoice" type="order" id=$order_id customer="*"}
+    <p>Bonjour,</p>
+    <p>Suite à votre achat, vous trouverez ci dessous le(s) numéro(s) de licence correspondant à votre commande :</p>
+   
+    {loop type="order_product" name="order-products" order=$ID}
+    <ul class="list-unstyled">
+        {loop type="product" name="licenseid" ref="$REF"}
+        <li><strong>{$TITLE}</strong></li>
+        {loop type="licence" name="Licence" order_id="$order_id" product_id="$ID"}
+        <li><strong>N° de licence :</strong> {$PRODUCT_KEY}</li>
+        <li><strong>Date d'expiration :</strong> {$EXPIRATION_DATE|date_format:"%d/%m/%Y"}</li>
+        {/loop}
+        {/loop}
+    </ul>
+    {/loop}
+
+
+
+
+
+{/loop}
+
+<p>Contactez nous pour plus d'informations.</p>
+
+<p>Cordialement,</p>
+{/block}

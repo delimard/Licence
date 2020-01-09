@@ -1,0 +1,315 @@
+{extends file="admin-layout.tpl"}
+{default_translation_domain domain='licence.bo.default'}
+
+{block name="no-return-functions"}
+    {$admin_current_location = 'tools'}
+{/block}
+
+{block name="page-title"}{intl l='Licence'}{/block}
+
+{block name="check-resource"}admin.module{/block}
+{block name="check-access"}view{/block}
+{block name="check-module"}Licence{/block}
+
+{block name="main-content"}
+    <div id="wrapper" class="container">
+
+        {if $general_error}
+            <div class="alert alert-danger">
+                {$general_error}
+            </div>
+        {/if}
+
+        <!-- Licence list -->
+        <div class="general-block-decorator">
+            <div class="table-responsive">
+                <table class="table table-striped table-condensed" id="Licence-table">
+                    <caption class="clearfix">
+                        {intl l="Licence"}
+
+                        {loop name="auth-create" type="auth" role="ADMIN" resource="admin.module" access="CREATE" module="Licence"}
+                            <div class="pull-right">
+                                <a class="btn btn-default btn-primary" title="{intl l='Create a new Licence entry' d='licence.bo.default'}" data-target="#Licence-create" data-toggle="modal">
+                                    <i class="glyphicon glyphicon-plus-sign"></i>
+                                </a>
+                            </div>
+                        {/loop}
+                    </caption>
+
+                    <thead>
+                    <tr>
+                        <th>
+                            {admin_sortable_header
+                                current_order=$order
+                                order='id'
+                                reverse_order='id-reverse'
+                                path={url path='/admin/module/Licence/Licence' target='Licence-table'}
+                                label="{intl l='Id' d='licence.bo.default'}"
+                            }
+                        </th>
+                        <th>
+                            {admin_sortable_header
+                                current_order=$order
+                                order='order_id'
+                                reverse_order='order_id-reverse'
+                                path={url path='/admin/module/Licence/Licence' target='Licence-table'}
+                                label="{intl l='OrderId' d='licence.bo.default'}"
+                            }
+                        </th>
+                        <th>
+                            {admin_sortable_header
+                                current_order=$order
+                                order='customer_id'
+                                reverse_order='customer_id-reverse'
+                                path={url path='/admin/module/Licence/Licence' target='Licence-table'}
+                                label="{intl l='CustomerId' d='licence.bo.default'}"
+                            }
+                        </th>
+                        <th>
+                            {admin_sortable_header
+                                current_order=$order
+                                order='product_id'
+                                reverse_order='product_id-reverse'
+                                path={url path='/admin/module/Licence/Licence' target='Licence-table'}
+                                label="{intl l='ProductId' d='licence.bo.default'}"
+                            }
+                        </th>
+                        <th>
+                            {admin_sortable_header
+                                current_order=$order
+                                order='product_key'
+                                reverse_order='product_key-reverse'
+                                path={url path='/admin/module/Licence/Licence' target='Licence-table'}
+                                label="{intl l='ProductKey' d='licence.bo.default'}"
+                            }
+                        </th>
+                        <th>
+                            {admin_sortable_header
+                                current_order=$order
+                                order='active_machine'
+                                reverse_order='active_machine-reverse'
+                                path={url path='/admin/module/Licence/Licence' target='Licence-table'}
+                                label="{intl l='ActiveMachine' d='licence.bo.default'}"
+                            }
+                        </th>
+                        <th>
+                            {admin_sortable_header
+                                current_order=$order
+                                order='expiration_date'
+                                reverse_order='expiration_date-reverse'
+                                path={url path='/admin/module/Licence/Licence' target='Licence-table'}
+                                label="{intl l='ExpirationDate' d='licence.bo.default'}"
+                            }
+                        </th>
+                        <th>
+                            {intl l="Actions"}
+                        </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {loop name="licence-list" type="licence" order=$order}
+                        <tr>
+                            <td>
+                                <a href="{url path='/admin/module/Licence/Licence/edit' Licence_id=$ID}">{$ID}</a>
+                            </td>
+                            <td>
+                                {$ORDER_ID}
+                            </td>
+                            <td>
+                                {$CUSTOMER_ID}
+                            </td>
+                            <td>
+                                {$PRODUCT_ID}
+                            </td>
+                            <td>
+                                {$PRODUCT_KEY}
+                            </td>
+                            <td>
+                                {$ACTIVE_MACHINE}
+                            </td>
+                            <td>
+                                {$EXPIRATION_DATE}
+                            </td>
+                            {* Actions *}
+                            <td>
+                                <div class="btn-group">
+                                    {loop name="auth-edit" type="auth" role="ADMIN" resource="admin.module" access="UPDATE" module="Licence"}
+                                        <a class="btn btn-default btn-xs" title="{intl l='Edit this Licence' d='licence.bo.default'}"  href="{url path='/admin/module/Licence/Licence/edit' Licence_id=$ID}">
+                                            <i class="glyphicon glyphicon-edit"></i>
+                                        </a>
+                                    {/loop}
+                                    {loop name="auth-delete" type="auth" role="ADMIN" resource="admin.module" access="DELETE" module="Licence"}
+                                        <a class="btn btn-default btn-xs Licence-delete" title="{intl l='Delete this Licence' d='licence.bo.default'}" data-target="#Licence-delete" data-toggle="modal" data-id="{$ID}">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </a>
+                                    {/loop}
+                                </div>
+                            </td>
+                        </tr>
+                    {/loop}
+                    {elseloop rel="licence-list"}
+                        <tr>
+                            <td colspan="1000">
+                                <div class="alert alert-info">
+                                    {intl l="There is no Licence" d="licence.bo.default"}
+                                </div>
+                            </td>
+                        </tr>
+                    {/elseloop}
+                    </tbody>
+
+                    {ifloop rel="licence-list"}
+                    <tfoot>
+                        <tr>
+                            <td colspan="7">
+                                {include
+                                file           = "includes/pagination.html"
+
+                                loop_ref       = "licence-list"
+                                max_page_count = 20
+                                page_url       = "{url path="/admin/module/Licence/Licence" order=$order target='Licence-table'}"
+                                }
+                            </td>
+                        </tr>
+                    </tfoot>
+                    {/ifloop}
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    {* CREATE Modal *}
+
+    {form name="Licence.create"}
+    {capture "Licence_create"}
+        {form_hidden_fields form=$form}
+
+
+        {render_form_field form=$form field="success_url" value={url path='/admin/module/Licence/Licence/edit?Licence_id=_ID_'}}
+
+        {form_field form=$form field="order_id"}
+            <div class="form-group">
+                <label class="control-label" for="{$label_attr.for}">
+                    {$label}
+                    {if $required}<span class="required">*</span>{/if}
+                </label>
+
+                {form_error form=$form field="order_id"}{$message}{/form_error}
+
+                <input type="integer" class="form-control" name="{$name}" id="{$label_attr.for}" value="{$ORDER_ID}" placeholder="{intl l='The Licence order_id'}" />
+            </div>
+        {/form_field}
+        {form_field form=$form field="customer_id"}
+            <div class="form-group">
+                <label class="control-label" for="{$label_attr.for}">
+                    {$label}
+                    {if $required}<span class="required">*</span>{/if}
+                </label>
+
+                {form_error form=$form field="customer_id"}{$message}{/form_error}
+
+                <input type="integer" class="form-control" name="{$name}" id="{$label_attr.for}" value="{$CUSTOMER_ID}" placeholder="{intl l='The Licence customer_id'}" />
+            </div>
+        {/form_field}
+        {form_field form=$form field="product_id"}
+            <div class="form-group">
+                <label class="control-label" for="{$label_attr.for}">
+                    {$label}
+                    {if $required}<span class="required">*</span>{/if}
+                </label>
+
+                {form_error form=$form field="product_id"}{$message}{/form_error}
+
+                <input type="integer" class="form-control" name="{$name}" id="{$label_attr.for}" value="{$PRODUCT_ID}" placeholder="{intl l='The Licence product_id'}" />
+            </div>
+        {/form_field}
+        {form_field form=$form field="product_key"}
+            <div class="form-group">
+                <label class="control-label" for="{$label_attr.for}">
+                    {$label}
+                    {if $required}<span class="required">*</span>{/if}
+                </label>
+
+                {form_error form=$form field="product_key"}{$message}{/form_error}
+
+                <textarea class="form-control" name="{$name}" id="{$label_attr.for}"placeholder="{intl l='The Licence product_key'}">{$PRODUCT_KEY}</textarea>
+            </div>
+        {/form_field}
+        {form_field form=$form field="active_machine"}
+            <div class="form-group">
+                <label class="control-label" for="{$label_attr.for}">
+                    {$label}
+                    {if $required}<span class="required">*</span>{/if}
+                </label>
+
+                {form_error form=$form field="active_machine"}{$message}{/form_error}
+
+                <textarea class="form-control" name="{$name}" id="{$label_attr.for}"placeholder="{intl l='The Licence active_machine'}">{$ACTIVE_MACHINE}</textarea>
+            </div>
+        {/form_field}
+        {form_field form=$form field="expiration_date"}
+            <div class="form-group">
+                <label class="control-label" for="{$label_attr.for}">
+                    {$label}
+                    {if $required}<span class="required">*</span>{/if}
+                </label>
+
+                {form_error form=$form field="expiration_date"}{$message}{/form_error}
+
+                    <div class='input-group date do-picker-date'>
+                        <input type="text" class="form-control" name="{$name}" id="{$label_attr.for}" value="{$EXPIRATION_DATE}" placeholder="{intl l='The Licence expiration_date'}" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        {/form_field}
+    {/capture}
+
+    {include file="includes/generic-create-dialog.html"
+
+
+        dialog_id       = "Licence-create"
+        dialog_title    = {intl l="Create an entry of Licence" d="licence.bo.default"}
+        dialog_body     = {$smarty.capture.Licence_create nofilter}
+
+        dialog_ok_label     = {intl l="Create"}
+        dialog_cancel_label = {intl l="Cancel"}
+
+        form_action        = {$current_url}
+        form_enctype       = {form_enctype form=$form}
+    }
+    {/form}
+
+
+    {* DELETE modal *}
+
+    {capture "Licence_delete"}
+        {intl l="Do you really want to delete this Licence entry ?" d="licence.bo.default"}
+        <input type="hidden" name="Licence_id" id="Licence_delete_id" value="" />
+    {/capture}
+
+    {include file="includes/generic-confirm-dialog.html"
+
+        dialog_id       = "Licence-delete"
+        dialog_title    = {intl l="Delete an entry of Licence" d="licence.bo.default"}
+        dialog_message  = {$smarty.capture.Licence_delete nofilter}
+
+        dialog_ok_label     = {intl l="Delete"}
+        dialog_cancel_label = {intl l="Cancel"}
+
+        form_action         = {token_url path='/admin/module/Licence/Licence/delete'}
+    }
+{/block}
+
+{block name="javascript-initialization"}
+    <script>
+        $(function() {
+            $('a.Licence-delete').click(function(ev) {
+                $('#Licence_delete_id').val($(this).data('id'));
+            });
+        });
+    </script>
+{/block}

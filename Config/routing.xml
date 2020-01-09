@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+  <!--
+
+    if a /admin/module/licence/ route is provided, a "Configuration" button will be displayed
+    for the module in the module list. Clicking this button will invoke this route.
+
+    <route id="my_route_id" path="/admin/module/licence">
+        <default key="_controller">Licence\Full\Class\Name\Of\YourConfigurationController::methodName</default>
+    </route>
+
+    <route id="my_route_id" path="/admin/module/licence/route-name">
+        <default key="_controller">Licence\Full\Class\Name\Of\YourAdminController::methodName</default>
+    </route>
+
+    <route id="my_route_id" path="/my/route/name">
+        <default key="_controller">Licence\Full\Class\Name\Of\YourOtherController::methodName</default>
+    </route>
+
+    ...add as many routes as required.
+
+    <route>
+    ...
+    </route>
+    -->
+  <route id="licence.Licence.list" path="/admin/module/Licence/Licence" methods="get">
+    <default key="_controller">Licence:Licence:default</default>
+  </route>
+  <route id="licence.Licence.create" path="/admin/module/Licence/Licence" methods="post">
+    <default key="_controller">Licence:Licence:create</default>
+  </route>
+  <route id="licence.Licence.view" path="/admin/module/Licence/Licence/edit" methods="get">
+    <default key="_controller">Licence:Licence:update</default>
+  </route>
+  <route id="licence.Licence.edit" path="/admin/module/Licence/Licence/edit" methods="post">
+    <default key="_controller">Licence:Licence:processUpdate</default>
+  </route>
+  <route id="licence.Licence.delete" path="/admin/module/Licence/Licence/delete" methods="post">
+    <default key="_controller">Licence:Licence:delete</default>
+  </route>
+</routes>

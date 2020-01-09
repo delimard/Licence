@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://thelia.net/schema/dic/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://thelia.net/schema/dic/config http://thelia.net/schema/dic/config/thelia-1.0.xsd">
+  <loops>
+    <loop name="Licence" class="Licence\Loop\LicenceKeyLoop"/>
+    <loop name="licence" class="Licence\Loop\Licence"/>
+  </loops>
+  <forms>
+    <!--
+        <form name="MyFormName" class="Licence\Form\MySuperForm" />
+        -->
+    <form name="Licence.create" class="Licence\Form\LicenceCreateForm"/>
+    <form name="Licence.update" class="Licence\Form\LicenceUpdateForm"/>
+  </forms>
+  <commands>
+    <!--
+        <command class="Licence\Command\MySuperCommand" />
+        -->
+  </commands>
+  <!--
+    <services>
+
+    </services>
+    -->
+
+    <hooks>
+        <hook id="licence.readlicence.hook" class="Licence\Hook\LicenceHook">
+            <tag name="hook.event_listener" event="order-edit.after-order-product-list" type="back" method="ReadLicence" />
+        </hook>
+    </hooks>
+
+  <!--
+    <exports>
+
+    </exports>
+    -->
+  <!--
+    <imports>
+
+    </imports>
+    -->
+  <services>
+    <service id="action.licence.Licence_table" class="Licence\Action\LicenceAction">
+      <tag name="kernel.event_subscriber"/>
+    </service>
+    <service id="licence.mail" class="Licence\EventListeners\SendMail">
+            <argument type="service" id="mailer"/>
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="kernel.event_subscriber"/>
+    </service>
+    <service id="licence.form.type.Licence_id" class="Licence\Form\Type\LicenceIdType">
+      <argument id="thelia.translator" type="service"/>
+      <tag name="thelia.form.type"/>
+    </service>
+  </services>
+</config>

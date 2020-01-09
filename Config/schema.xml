@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="thelia"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="../../../core/vendor/propel/propel/resources/xsd/database.xsd" >
+
+ <table name="Licence" namespace="Licence\Model">
+        <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
+        <column name="order_id" type="INTEGER" />
+        <column name="customer_id" type="INTEGER" />
+        <column name="product_id" type="INTEGER" />
+        <column name="product_key" type="LONGVARCHAR" />
+        <column name="active_machine" type="LONGVARCHAR" />
+        <column name="expiration_date" type="DATE" />
+        <behavior name="versionable">
+            <parameter name="log_created_at" value="true" />
+            <parameter name="log_created_by" value="true" />
+        </behavior>
+    </table>
+   
+    <external-schema filename="local/config/schema.xml" referenceOnly="true" />
+</database>
