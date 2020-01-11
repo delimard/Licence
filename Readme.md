@@ -20,6 +20,17 @@ This module provide a new loop: licence
 </br>
 {/loop}
 
+### Output arguments
+
+|Variable         |Description |
+|---              |--- |
+|$ID              | the licence id                                                             |                                                                       
+|$ORDER_ID        | the order id                                                               |                                                                                      |$CUSTOMER_ID     | the customer id                                                            |
+|$PRODUCT_ID      | the product id                                                             |                                                                                  
+|$PRODUCT_KEY     | the product key generated                                                  |                                                                          
+|$EXPIRATION_DATE | the date of expiration                                                     |          
+|$ACTIVE_MACHINE  | free input. Can be set the way you want                                    |
+
 ## Hook
 A hook is added on the order page. You can have a quick look on the product_key and the expiration_date generated when the order is paid.
 
