@@ -1,13 +1,13 @@
 # Licence
  
-Installation
+##Installation
 
-Manually
+**Manually**
 
 Copy the module into <thelia_root>/local/modules/ directory.
 Activate it in your thelia administration panel
 
-Loop
+##Loop
 This module provide a new loop: licence
 
 Example:
@@ -16,8 +16,8 @@ Example:
         {$EXPIRATION_DATE|date_format:"%d/%m/%Y"}
 {/loop}
 
-Hook
+##Hook
 A hook is added on the order page. You can have a quick look on the product_key and the expiration_date generated when the order is paid.
 
-Email:
+##Email
 When the order is paid, an email is sent to the customer with the name of the product, the product key and his expiration date.
