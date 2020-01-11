@@ -10,10 +10,13 @@ Activate it in your thelia administration panel
 ## Loop
 This module provide a new loop: licence
 
-Example:
+* Example: *
  {loop type="licence" name="Licence" order_id="$order_id" product_id="$ID"}
+</br>
         {$PRODUCT_KEY}</li>
+</br>
         {$EXPIRATION_DATE|date_format:"%d/%m/%Y"}
+</br>
 {/loop}
 
 ## Hook
