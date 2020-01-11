@@ -11,6 +11,7 @@ Activate it in your thelia administration panel
 This module provide a new loop: licence
 
 *Example:*
+</br>
  {loop type="licence" name="Licence" order_id="$order_id" product_id="$ID"}
 </br>
         {$PRODUCT_KEY}</li>
