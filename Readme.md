@@ -1,5 +1,7 @@
 # Licence
- 
+This thelia 2 module was created to generate product_key serial and expiration date for virtual product.
+
+*The expiration date is set by default to the date of the order invoice +1 year.*
 ## Installation
 
 **Manually**
