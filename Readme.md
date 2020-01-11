@@ -38,3 +38,8 @@ A hook is added on the order page. You can have a quick look on the product_key 
 
 ## Email
 When the order is paid, an email is sent to the customer with the name of the product, the product key and his expiration date.
+
+## Special Thanks
+Special thanks to [@Roadster31](https://github.com/roadster31) for his help to understanding Thelia 2 module developpement.
+
+And a thank to the [thelia forum](https://forum.thelia.net).
